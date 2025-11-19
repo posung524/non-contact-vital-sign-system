@@ -17,53 +17,68 @@ This project integrates Microsoft Kinect RGB-D sensing with deep learning–base
 
 ---
 
-## 🔍 Module Designs
+## 🔍 Module Designs (Architectures)
 
-Below are the architectures of each individual module used in the system.
-
----
-
-## 🧩 1. Identity Authentication
-
-Uses **ArcFace** with a **ResNet-50 backbone** and depth-based liveness detection.
-
+### 🧩 1. Identity Authentication
 ![face model](docs/人臉架構.png)
 
----
-
-## 🧩 2. Age & Gender Estimation (ViT)
-
-Uses **Vision Transformer (ViT-Base-Patch16-384)** with age regression, gender classification, and ordinal age prediction.
-
+### 🧩 2. Age & Gender Estimation (ViT)
 ![age gender architecture](docs/age_gender＿架構圖.png)
 
----
-
-## 🧩 3. Height & Weight Estimation
-
-Uses MediaPipe Pose, 3D reconstruction, and three volume estimators (voxel, PCA ellipsoid, convex hull) with quality-weighted fusion.
-
+### 🧩 3. Height & Weight Estimation
 ![height weight architecture](docs/身高體重_map.png)
 
----
-
-## 🧩 4. Pain-site Marking
-
-Uses hand/pose landmarks, fingertip direction vectors, and depth-based front/back discrimination.
-
+### 🧩 4. Pain-site Marking
 ![pain region architecture](docs/痛痛痛_map.png)
 
 ---
 
 ## 🚶‍♂️ System Workflow (Chapter 3)
-
-The full user flow includes identity authentication, age/gender estimation, height/weight measurement, and pain-region annotation.
-
 ![system workflow](docs/無接觸系統使用流程.png)
 
 ---
 
-## 📁 Repository Structure
+# 📊 Experimental Results
+
+Below are the results from each module.
+
+---
+
+## 🔹 1. Identity Authentication Results (ArcFace + Liveness)
+
+| ROC Curve | Similarity Histogram | t-SNE Embedding |
+|----------|----------------------|------------------|
+| ![](results/auth/roc.png) | ![](results/auth/sim_hist.png) | ![](results/auth/tsne.png) |
+
+---
+
+## 🔹 2. Age & Gender Estimation Results (ViT)
+
+### Age Regression Scatter Plot
+![age regression scatter](results/age_gender/age_scatter_regression.png)
+
+### Gender Confusion Matrix
+![gender confusion matrix](results/age_gender/gender_confusion_matrix.png)
+
+### Gender ROC Curve
+![gender roc curve](results/age_gender/gender_roc_curve.png)
+
+---
+
+## 🔹 3. Pain-site Detection Results
+
+### Pain Point Example
+![pain point](results/pain_marker/pain_point.png)
+
+### Pain Back / Chest Examples
+<div style="display: flex; gap: 10px;">
+    <img src="results/pain_marker/pain_back.png" width="45%">
+    <img src="results/pain_marker/pain_chest.png" width="45%">
+</div>
+
+---
+
+# 📁 Repository Structure
 
 ```txt
 non-contact-vital-sign-sys/
@@ -89,9 +104,3 @@ non-contact-vital-sign-sys/
 │   └── pain_marker/
 │
 └── docs/
-    ├── 整體架構圖.png
-    ├── 人臉架構.png
-    ├── age_gender＿架構圖.png
-    ├── 身高體重_map.png
-    ├── 痛痛痛_map.png
-    └── 無接觸系統使用流程.png
