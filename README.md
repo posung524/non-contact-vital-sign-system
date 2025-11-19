@@ -8,31 +8,58 @@ This repository accompanies the thesis:
 
 ---
 
-## 🌟 Overview
+## 🌟 System Overview
 
-This project integrates Microsoft Kinect RGB-D sensing with deep learning-based estimation modules to provide a fully contactless outpatient check-in and physiological measurement system. The system performs four main functions:
+This project integrates Microsoft Kinect RGB-D sensing with deep learning–based estimation modules to build a fully contactless outpatient check-in and physiological measurement system.
 
-### ✔ Identity Authentication
-- Face recognition using ArcFace with a ResNet-50 backbone  
-- Depth-based liveness detection to prevent spoof attacks  
+### 🔶 Overall System Architecture
+![overall architecture](docs/整體架構圖.png)
 
-### ✔ Age & Gender Estimation
-- Vision Transformer (ViT-Base-Patch16-384)  
-- Multi-task learning including gender classification, age regression, and ordinal age estimation (CORAL)  
+---
 
-### ✔ Height & Weight Estimation
-- MediaPipe Pose for extracting 3D keypoints  
-- Point-cloud reconstruction from RGB-D  
-- Volume estimation with voxelization, PCA ellipsoid, and convex hull  
-- Adaptive density model for body weight estimation  
+## 🔍 Module Designs
 
-### ✔ Pain-site Marking
-- MediaPipe Hands and Pose  
-- Fingertip pointing vector and region intersection  
-- Depth-based front/back discrimination  
-- Structured pain-region output  
+Below are the architectures of each individual module used in the system.
 
-The entire measurement process is designed to complete within **15–20 seconds**, suitable for clinical outpatient workflows.
+---
+
+## 🧩 1. Identity Authentication
+
+Uses **ArcFace** with a **ResNet-50 backbone** and depth-based liveness detection.
+
+![face model](docs/人臉架構.png)
+
+---
+
+## 🧩 2. Age & Gender Estimation (ViT)
+
+Uses **Vision Transformer (ViT-Base-Patch16-384)** with age regression, gender classification, and ordinal age prediction.
+
+![age gender architecture](docs/age_gender＿架構圖.png)
+
+---
+
+## 🧩 3. Height & Weight Estimation
+
+Uses MediaPipe Pose, 3D reconstruction, and three volume estimators (voxel, PCA ellipsoid, convex hull) with quality-weighted fusion.
+
+![height weight architecture](docs/身高體重_map.png)
+
+---
+
+## 🧩 4. Pain-site Marking
+
+Uses hand/pose landmarks, fingertip direction vectors, and depth-based front/back discrimination.
+
+![pain region architecture](docs/痛痛痛_map.png)
+
+---
+
+## 🚶‍♂️ System Workflow (Chapter 3)
+
+The full user flow includes identity authentication, age/gender estimation, height/weight measurement, and pain-region annotation.
+
+![system workflow](docs/無接觸系統使用流程.png)
 
 ---
 
@@ -43,7 +70,6 @@ non-contact-vital-sign-sys/
 │
 ├── README.md
 ├── requirements.txt
-├── LICENSE
 │
 ├── src/
 │   ├── auth_module.py
@@ -63,3 +89,9 @@ non-contact-vital-sign-sys/
 │   └── pain_marker/
 │
 └── docs/
+    ├── 整體架構圖.png
+    ├── 人臉架構.png
+    ├── age_gender＿架構圖.png
+    ├── 身高體重_map.png
+    ├── 痛痛痛_map.png
+    └── 無接觸系統使用流程.png
